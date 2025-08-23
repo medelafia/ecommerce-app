@@ -29,8 +29,8 @@ jobs:
       - name : install kubernetes
         run : | 
            curl -LO https://dl.k8s.io/release/v1.33.0/bin/linux/arm64/kubectl
-           install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-           chmod +x /usr/local/bin/kubectl
+           sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+           sudo chmod +x /usr/local/bin/kubectl
       - name : config kubernetes cluster
         run : | 
             aws eks update-kubeconfig --name ${{secrets.AWS_CLUSTER_NAME}} --region ${{secrets.AWS_REGION}}
@@ -61,6 +61,6 @@ jobs:
           --from-literal=ADMIN_PASSWORD=${{secrets.ADMIN_PASSWORD}}
       - name : rerun kubecluster 
         run : | 
-          kubectl apply -f k8s/webapp.yaml          
+          sudo kubectl apply -f k8s/webapp.yaml          
           
           
