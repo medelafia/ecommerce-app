@@ -44,21 +44,21 @@ jobs:
       - name : create secrets
         run : | 
           sudo kubectl create secret generic secret-env-file \ 
-          --from-literal=MYSQL_ROOT_PASSWORD=${{secrets.MYSQL_ROOT_PASSWORD}} \ 
-          --from-literal=MYSQL_DATABASE=${{secrets.MYSQL_DATABASE}} \ 
-          --from-literal=MYSQL_USER=${{secrets.MYSQL_USER}} \ 
-          --from-literal=MYSQL_PASSWORD=${{secrets.MYSQL_PASSWORD}} \ 
-          --from-literal=MYSQL_HOST=${{secrets.MYSQL_HOST}} \ 
-          --from-literal=MYSQL_PORT=${{secrets.MYSQL_PORT}} \ 
-          --from-literal=S3_ACCESS_KEY=${{secrets.S3_ACCESS_KEY}} \ 
-          --from-literal=S3_SECRET_KEY=${{secrets.S3_SECRET_KEY}} \ 
-          --from-literal=S3_BUCKET_NAME=${{secrets.S3_BUCKET_NAME}} \ 
-          --from-literal=MAIL_FROM=${{secrets.MAIL_FROM}} \ 
-          --from-literal=MAIL_SMTP_SERVER=${{secrets.MAIL_SMTP_SERVER}} \ 
-          --from-literal=MAIL_PASSWORD=${{secrets.MAIL_PASSWORD}} \ 
-          --from-literal=ADMIN_EMAIL=${{secrets.ADMIN_EMAIL}} \ 
-          --from-literal=ADMIN_NOM=${{secrets.ADMIN_NOM}} \ 
-          --from-literal=ADMIN_PASSWORD=${{secrets.ADMIN_PASSWORD}}
+          --from-literal=MYSQL_ROOT_PASSWORD='${{secrets.MYSQL_ROOT_PASSWORD}}' \ 
+          --from-literal=MYSQL_DATABASE='${{secrets.MYSQL_DATABASE}}' \ 
+          --from-literal=MYSQL_USER='${{secrets.MYSQL_USER}}' \ 
+          --from-literal=MYSQL_PASSWORD='${{secrets.MYSQL_PASSWORD}}' \ 
+          --from-literal=MYSQL_HOST='${{secrets.MYSQL_HOST}}' \ 
+          --from-literal=MYSQL_PORT='${{secrets.MYSQL_PORT}}' \ 
+          --from-literal=S3_ACCESS_KEY='${{secrets.S3_ACCESS_KEY}}' \ 
+          --from-literal=S3_SECRET_KEY='${{secrets.S3_SECRET_KEY}}' \ 
+          --from-literal=S3_BUCKET_NAME='${{secrets.S3_BUCKET_NAME}}' \ 
+          --from-literal=MAIL_FROM='${{secrets.MAIL_FROM}}' \ 
+          --from-literal=MAIL_SMTP_SERVER='${{secrets.MAIL_SMTP_SERVER}}' \ 
+          --from-literal=MAIL_PASSWORD='${{secrets.MAIL_PASSWORD}}' \ 
+          --from-literal=ADMIN_EMAIL='${{secrets.ADMIN_EMAIL}}' \ 
+          --from-literal=ADMIN_NOM='${{secrets.ADMIN_NOM}}' \ 
+          --from-literal=ADMIN_PASSWORD='${{secrets.ADMIN_PASSWORD}}'
       - name : rerun kubecluster 
         run : | 
           sudo kubectl apply -f k8s/webapp.yaml          
