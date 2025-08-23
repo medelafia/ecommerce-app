@@ -33,7 +33,9 @@ jobs:
            sudo chmod +x /usr/local/bin/kubectl
       - name : config kubernetes cluster
         run : | 
+            mkdir -p $HOME/.kube
             aws eks update-kubeconfig --name ${{secrets.AWS_CLUSTER_NAME}} --region ${{secrets.AWS_REGION}}
+            kubectl config view
       - name : authenticate with ecr 
         id : login-ecr 
         uses : aws-actions/amazon-ecr-login@v2
