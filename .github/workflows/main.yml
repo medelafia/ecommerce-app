@@ -41,8 +41,8 @@ jobs:
         uses : aws-actions/amazon-ecr-login@v2
       - name : build image 
         run : | 
-          docker build -t ${{secrets.DOCKER_REGISTRY}}/ecommerce-web-app:latest . 
-          docker push ${{secrets.DOCKER_REGISTRY}}/ecommerce-web-app:latest
+          docker build -t ${{secrets.DOCKER_REGISTRY}}/ecommerce-web-app:1 . 
+          docker push ${{secrets.DOCKER_REGISTRY}}/ecommerce-web-app:1
       - name : create secrets
         run : | 
           cat > secret.env << EOF
@@ -66,7 +66,7 @@ jobs:
           kubectl create secret generic secret_env_file --from-env-file=secret.env
       - name : rerun kubecluster 
         run : | 
-          kubectl apply -f k8s/webapp.yaml          
+          kubectl set image deployments/webapp ${{secrets.DOCKER_REGISTRY}}/ecommerce-web-app=${{secrets.DOCKER_REGISTRY}}/ecommerce-web-app:1
           kubectl get svc 
           kubectl get pods
           
