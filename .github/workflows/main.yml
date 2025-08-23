@@ -66,6 +66,6 @@ jobs:
           kubectl create secret generic secret_env_file --from-env-file=secret.env
       - name : rerun kubecluster 
         run : | 
-          sudo kubectl apply -f k8s/webapp.yaml          
+          kubectl apply -f k8s/webapp.yaml          
           
           
