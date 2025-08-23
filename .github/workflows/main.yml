@@ -7,7 +7,7 @@ jobs:
     runs-on : ubuntu-latest 
     steps : 
       - name : Setup Repo 
-        uses : actions/chechout@v4 
+        uses : actions/checkout@v4 
       - name : Build the war file
         run : sh build.sh
       - name : install aws 
