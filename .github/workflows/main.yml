@@ -43,7 +43,7 @@ jobs:
           docker push ${{secrets.DOCKER_REGISTRY}}/ecommerce-web-app:latest
       - name : create secrets
         run : | 
-          sudo kubectl create secret generic secret-env-file \ 
+          sudo kubectl create secret generic secret_env_file \ 
           --from-literal=MYSQL_ROOT_PASSWORD="${{secrets.MYSQL_ROOT_PASSWORD}}" \ 
           --from-literal=MYSQL_DATABASE="${{secrets.MYSQL_DATABASE}}" \ 
           --from-literal=MYSQL_USER="${{secrets.MYSQL_USER}}" \ 
