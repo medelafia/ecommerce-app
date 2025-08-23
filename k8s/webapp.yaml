@@ -1,0 +1,40 @@
+apiVersion : apps/v1 
+kind : Deployment
+metadata : 
+ name : webapp 
+spec :
+ replicas : 2
+ selector : 
+  matchLabels : 
+   app : webapp
+ template : 
+  metadata : 
+   labels : 
+    app : webapp
+  spec : 
+   volumes : 
+    - name : secret-volume
+      secret :
+       secretName : secret-env-file 
+   containers :
+    - name : web-app-container
+      image : 897279496684.dkr.ecr.eu-north-1.amazonaws.com/ecommerce-web-app:latest 
+      ports : 
+       - containerPort : 8080
+      imagePullPolicy: Always
+      volumeMounts :
+       - name : secret-volume
+         readOnly : true
+         mountPath : "/etc/secret-volume"
+---
+apiVersion : v1 
+kind : Service
+metadata : 
+ name : ecommerce-app 
+spec : 
+ type : LoadBalancer
+ selector: 
+  app : webapp
+ ports : 
+  - port : 80
+    targetPort : 8080
