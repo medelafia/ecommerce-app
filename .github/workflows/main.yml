@@ -39,7 +39,7 @@ jobs:
       - name : build image 
         run : | 
           docker build -t ${{secrets.DOCKER_REGISTRY}}/ecommerce-web-app:latest . 
-          docker push ${{secrets.AWS_DOCKER_REGISTRY}}/ecommerce-web-app:latest
+          docker push ${{secrets.DOCKER_REGISTRY}}/ecommerce-web-app:latest
       - name : create secrets
         run : | 
           kubectl create secret generic secret-env-file \ 
