@@ -15,7 +15,7 @@ spec :
    volumes : 
     - name : secret-volume
       secret :
-       secretName : secret-env-file 
+       secretName : secret_env_file 
    containers :
     - name : web-app-container
       image : 897279496684.dkr.ecr.eu-north-1.amazonaws.com/ecommerce-web-app:latest 
