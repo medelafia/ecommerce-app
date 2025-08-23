@@ -1,0 +1,64 @@
+name : CI/CD pipeline for ecommerce app
+on : 
+  push : 
+    branches : [main]
+jobs: 
+  build_deploy : 
+    runs-on : ubuntu-latest 
+    steps : 
+      - name : Setup Repo 
+        uses : actions/chechout@v4 
+      - name : Build the war file
+        run : sh build.sh
+      - name : install aws 
+        run : | 
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          sudo apt install unzip 
+          sudo ./aws/install --update
+      - name : configure aws credientials 
+        uses : aws-actions/configure-aws-credentials@v4
+        with : 
+          aws-access-key-id : ${{secrets.AWS_ACCESS_KEY_ID}} 
+          aws-secret-access-key : ${{secrets.AWS_ACCESS_KEY}} 
+          aws-region : ${{secrets.AWS_REGION}} 
+      - name : install docker 
+        run : | 
+           curl -fsSL https://get.docker.com -o get-docker.sh 
+           sh get-docker.sh
+      - name : install kubernetes
+        run : | 
+           curl -LO https://dl.k8s.io/release/v1.33.0/bin/linux/arm64/kubectl
+           sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+      - name : config kubernetes cluster
+        run : | 
+            aws eks update-config --name ${{secrets.AWS_CLUSTER_NAME}} --region ${{secrets.AWS_REGION}}
+      - name : authenticate with ecr 
+        id : login-ecr 
+        uses : aws-actions/amazon-ecr-login@v2
+      - name : build image 
+        run : | 
+          docker build -t ${{secrets.AWS_DOCKER_REGISTRY}}/ecommerce-web-app:latest . 
+          docker push ${{secrets.AWS_DOCKER_REGISTRY}}/ecommerce-web-app:latest
+      - name : create secrets
+        run : | 
+          kubectl create secret generic secret-env-file \ 
+          --from-literal=MYSQL_ROOT_PASSWORD=${{secrets.MYSQL_ROOT_PASSWORD}} \ 
+          --from-literal=MYSQL_DATABASE=${{secrets.MYSQL_DATABASE}} \ 
+          --from-literal=MYSQL_USER=${{secrets.MYSQL_USER}} \ 
+          --from-literal=MYSQL_PASSWORD=${{secrets.MYSQL_PASSWORD}} \ 
+          --from-literal=MYSQL_HOST=${{secrets.MYSQL_HOST}} \ 
+          --from-literal=MYSQL_PORT=${{secrets.MYSQL_PORT}} \ 
+          --from-literal=S3_ACCESS_KEY=${{secrets.S3_ACCESS_KEY}} \ 
+          --from-literal=S3_SECRET_KEY=${{secrets.S3_SECRET_KEY}} \ 
+          --from-literal=S3_BUCKET_NAME=${{secrets.S3_BUCKET_NAME}} \ 
+          --from-literal=MAIL_FROM=${{secrets.MAIL_FROM}} \ 
+          --from-literal=MAIL_SMTP_SERVER=${{secrets.MAIL_SMTP_SERVER}} \ 
+          --from-literal=MAIL_PASSWORD=${{secrets.MAIL_PASSWORD}} \ 
+          --from-literal=ADMIN_EMAIL=${{secrets.ADMIN_EMAIL}} \ 
+          --from-literal=ADMIN_NOM=${{secrets.ADMIN_NOM}} \ 
+          --from-literal=ADMIN_PASSWORD=${{secrets.ADMIN_PASSWORD}}
+      - name : rerun kubecluster 
+        run : | 
+          kubectl apply -f k8s/webapp.yaml          
+          
+          
