@@ -23,7 +23,7 @@ List<Product> products = (List<Product>)request.getAttribute("products") ;
 		<div class="my-5 py-5 row" >
 			<div class="col-md-6 px-5" > 
 				<p style="font-size: 60px; " class="text-primary" >
-					Bienvenue a Espace E-Commerce 
+					Welcome to E-Commerce Space
 				</p>
 				<p>
 					Discover the best products at unbeatable prices.
