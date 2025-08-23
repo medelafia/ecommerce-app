@@ -59,7 +59,7 @@ jobs:
           --from-literal=ADMIN_EMAIL="${{secrets.ADMIN_EMAIL}}" \
           --from-literal=ADMIN_NOM="${{secrets.ADMIN_NOM}}" \
           --from-literal=ADMIN_PASSWORD="${{secrets.ADMIN_PASSWORD}}" \
-          --server="${{secrets.AWS_EKS_API_SERVER}}"
+          --server=localhost:80
       - name : rerun kubecluster 
         run : | 
           sudo kubectl apply -f k8s/webapp.yaml          
