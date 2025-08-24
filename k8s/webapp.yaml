@@ -17,24 +17,74 @@ spec :
    labels : 
     app : webapp
   spec : 
-   volumes : 
-    - name : secret-volume
-      secret :
-       secretName : secret-file 
    containers :
     - name : web-app-container
-<<<<<<< HEAD
-      image : 897279496684.dkr.ecr.eu-north-1.amazonaws.com/ecommerce-web-app:2.0.1 
-=======
-      image : 897279496684.dkr.ecr.eu-north-1.amazonaws.com/ecommerce-web-app:2.0.1
->>>>>>> a560494f0731a4ba2c4f41738a12a595a20e0136
+      image : 897279496684.dkr.ecr.eu-north-1.amazonaws.com/ecommerce-web-app:2.0.4
       ports : 
        - containerPort : 8080
       imagePullPolicy: Always
-      volumeMounts :
-       - name : secret-volume
-         readOnly : true
-         mountPath : "/etc/secret-volume"
+      env : 
+       - name : MYSQL_ROOT_PASSWORD
+         valueFrom : 
+          name : secret-env-file
+          key : MYSQL_ROOT_PASSWORD
+       - name : MYSQL_DATABASE
+         valueFrom : 
+          name : secret-env-file
+          key : MYSQL_DATABASE
+       - name : MYSQL_USER
+         valueFrom : 
+          name : secret-env-file
+          key : MYSQL_USER
+       - name : MYSQL_PASSWORD
+         valueFrom : 
+          name : secret-env-file
+          key : MYSQL_PASSWORD
+       - name : MYSQL_HOST
+         valueFrom : 
+          name : secret-env-file
+          key : MYSQL_HOST
+       - name : MYSQL_PORT
+         valueFrom : 
+          name : secret-env-file
+          key : MYSQL_PORT
+       - name : S3_ACCESS_KEY
+         valueFrom : 
+          name : secret-env-file
+          key : S3_ACCESS_KEY
+       - name : S3_SECRET_KEY
+         valueFrom : 
+          name : secret-env-file
+          key : S3_SECRET_KEY
+       - name : S3_BUCKET_NAME
+         valueFrom : 
+          name : secret-env-file
+          key : S3_BUCKET_NAME
+       - name : MAIL_FROM
+         valueFrom : 
+          name : secret-env-file
+          key : MAIL_FROM
+       - name : MAIL_SMTP_SERVER
+         valueFrom : 
+          name : secret-env-file
+          key : MAIL_SMTP_SERVER
+       - name : MAIL_PASSWORD
+         valueFrom : 
+          name : secret-env-file
+          key : MAIL_PASSWORD
+       - name : ADMIN_EMAIL
+         valueFrom : 
+          name : secret-env-file
+          key : ADMIN_EMAIL
+       - name : ADMIN_NOM
+         valueFrom : 
+          name : secret-env-file
+          key : ADMIN_NOM
+       - name : ADMIN_PASSWORD
+         valueFrom : 
+          name : secret-env-file
+          key : ADMIN_PASSWORD
+      
 ---
 apiVersion : v1 
 kind : Service
