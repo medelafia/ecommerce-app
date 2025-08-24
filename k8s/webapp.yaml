@@ -23,7 +23,11 @@ spec :
        secretName : secret-file 
    containers :
     - name : web-app-container
+<<<<<<< HEAD
       image : 897279496684.dkr.ecr.eu-north-1.amazonaws.com/ecommerce-web-app:2.0.1 
+=======
+      image : 897279496684.dkr.ecr.eu-north-1.amazonaws.com/ecommerce-web-app:2.0.1
+>>>>>>> a560494f0731a4ba2c4f41738a12a595a20e0136
       ports : 
        - containerPort : 8080
       imagePullPolicy: Always
