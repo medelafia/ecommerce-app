@@ -69,7 +69,7 @@ jobs:
       - name : rerun kubecluster 
         run : | 
           kubectl set image deployments/webapp web-app-container=${{secrets.DOCKER_REGISTRY}}/ecommerce-web-app:$NEXT
-          kubectk autoscale --min=1 --max=2 --cpu-percent=10
+          kubectl autoscale --min=1 --max=2 --cpu-percent=10
           kubectl get svc 
           kubectl get pods
           
