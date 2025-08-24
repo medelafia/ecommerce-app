@@ -42,7 +42,6 @@
 		      <a href="#" style="color:white;margin-right:10px;text-decoration:none;">Facebook</a>
 		      <a href="#" style="color:white;margin-right:10px;text-decoration:none;">Twitter</a>
 		      <a href="#" style="color:white;margin-right:10px;text-decoration:none;">Instagram</a>
-		      <a href="#" style="color:white;text-decoration:none;">LinkedIn</a>
 		    </div>
 		
 		  </div>
