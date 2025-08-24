@@ -9,8 +9,8 @@ spec :
    app : webapp
  strategy:
    rollingUpdate:
-     maxSurge: 1
-     maxUnavailable: 1
+     maxSurge: 0
+     maxUnavailable: 0
    type: RollingUpdate
  template : 
   metadata : 
