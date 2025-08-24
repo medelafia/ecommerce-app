@@ -9,7 +9,9 @@ jobs:
       - name : Setup Repo 
         uses : actions/checkout@v4 
       - name : Build the war file
-        run : sh build.sh
+        run : |
+          sh build.sh
+          tree -a build/
       - name : install aws 
         run : | 
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
