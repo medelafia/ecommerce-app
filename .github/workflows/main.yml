@@ -65,7 +65,7 @@ jobs:
           ADMIN_PASSWORD="${{secrets.ADMIN_PASSWORD}}"
           EOF 
 
-          kubectl create secret generic secret_env_file --from-env-file=secret.env
+          kubectl create secret generic secret-env-file --from-env-file=secret.env
       - name : rerun kubecluster 
         run : | 
           kubectl set image deployments/webapp web-app-container=${{secrets.DOCKER_REGISTRY}}/ecommerce-web-app:${{secrets.NEXT_VERSION}}
