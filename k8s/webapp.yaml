@@ -10,7 +10,7 @@ spec :
  strategy:
    rollingUpdate:
      maxSurge: 0
-     maxUnavailable: 0
+     maxUnavailable: 1
    type: RollingUpdate
  template : 
   metadata : 
@@ -23,7 +23,7 @@ spec :
        secretName : secret_env_file 
    containers :
     - name : web-app-container
-      image : 897279496684.dkr.ecr.eu-north-1.amazonaws.com/ecommerce-web-app:latest 
+      image : 897279496684.dkr.ecr.eu-north-1.amazonaws.com/ecommerce-web-app:2.0.1
       ports : 
        - containerPort : 8080
       imagePullPolicy: Always
