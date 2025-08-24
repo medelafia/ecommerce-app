@@ -43,6 +43,7 @@ jobs:
         run : | 
           export CURRENT=$(kubectl get deployments webapp -o jsonpath="{..image}" | cut -d : -f 2)
           export NEXT=$((CURRENT+1))
+          echo "the next image version" + $NEXT 
           docker build -t ${{secrets.DOCKER_REGISTRY}}/ecommerce-web-app:$NEXT . 
           docker push ${{secrets.DOCKER_REGISTRY}}/ecommerce-web-app:$NEXT
       - name : create secrets
