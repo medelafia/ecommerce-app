@@ -41,7 +41,7 @@ jobs:
         uses : aws-actions/amazon-ecr-login@v2
       - name : build image 
         run : | 
-          export CURRENT=$(kubectl get deployments webapp -o jsonpath="{..image}")
+          export CURRENT=$(kubectl get deployments webapp -o jsonpath="{..image}" | cut -d : -f 2)
           export NEXT=$((CURRENT+1))
           docker build -t ${{secrets.DOCKER_REGISTRY}}/ecommerce-web-app:$NEXT . 
           docker push ${{secrets.DOCKER_REGISTRY}}/ecommerce-web-app:$NEXT
