@@ -14,7 +14,7 @@
 	body { 
 		height: 100vh;
 	}
-	@media (max-width : 600px ) {
+	@media (max-width : 800px ) {
 		#image-part {
 			display: none;
 		}
