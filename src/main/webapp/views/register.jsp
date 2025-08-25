@@ -14,7 +14,11 @@
 	body { 
 		height: 100vh;
 	}
-	
+	@media (max-width : 600px ) {
+		#image-part {
+			display: none;
+		}
+	}
 </style>
 
 </head>
@@ -22,10 +26,10 @@
 <body >
 
 	<div class="row h-100">
-		<div class="col-md-6 h-100">
+		<div class="col-lg-6 h-100" id="image-part">
 			<img alt="" src="/static/490-4908098_ecommerce-website-design-company-in-nashik-e-commerce.png" height="100%" width="100%">
 		</div>
-		<div class='h-100 bg-light d-flex align-items-center justify-content-center col-md-6'>
+		<div class='col-lg-6 h-100 bg-light d-flex align-items-center justify-content-center'>
 			<form action="/register" method="post" class='px-5 py-5 w-75'>
 				<%if(request.getAttribute("message") != null ){%>
 					<div class="alert alert-warning alert-dismissible fade show" role="alert">

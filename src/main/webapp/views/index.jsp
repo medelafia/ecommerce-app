@@ -21,7 +21,7 @@ List<Product> products = (List<Product>)request.getAttribute("products") ;
 	<jsp:include page="header.jsp" />
 	<div class="container bg-light rounded">
 		<div class="my-5 py-5 row" >
-			<div class="col-md-6 px-5" > 
+			<div class="col-md-6 px-5 order-sm-2 order-md-1" > 
 				<p style="font-size: 60px; " class="text-primary" >
 					Welcome to E-Commerce Space
 				</p>
@@ -32,7 +32,7 @@ List<Product> products = (List<Product>)request.getAttribute("products") ;
 				</p>
 				<a href="/products" class="btn btn-outline-primary mt-3">Go shopping<i class="fa-solid fa-arrow-right ms-3"></i></a>
 			</div>
-			<div class="col-md-6" > 
+			<div class="col-md-6 order-sm-1 order-md-2 my-sm-3" > 
 			  	<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   					<div class="carousel-inner">
 						<div class="carousel-item active">
@@ -48,22 +48,22 @@ List<Product> products = (List<Product>)request.getAttribute("products") ;
 		</div>
 	</div>
 	
-	<div style="width:100% ; height : 500px ; " class="container p-5">
+	<div style="width:100% ; height : min-500px ; " class="container p-5">
 		<div class="bg-dark row h-100 rounded-5">
-			<div class="col-md-6 p-5">
+			<div class="col-md-6 p-5 order-sm-2 order-md-1">
 				<div class="container p-5" >
 				 	<h1 class="text-white">Find your best products</h1>
 				 	<input class="form-control mt-5 rounded-pill p-3" placeholder="serach for product">
 				 </div>
 			</div>
-			<div class="col-md-6 d-flex align-items-center justify-content-center">
-				<img alt="" src="/static/ff1ad43f10afcf927ed3024c5fe3ebd5.jpg" width="400px" height="300px">
+			<div class="col-md-6 d-flex align-items-center justify-content-center order-sm-1 order-md-2 my-sm-3">
+				<img alt="" src="/static/ff1ad43f10afcf927ed3024c5fe3ebd5.jpg" width="400px" height="300px" class="rounded">
 			</div>
 		</div>
 	</div>
 	
 	
-	<div style="width:100% ; height : 600px ; " class="bg-light p-5 d-flex align-items-center">
+	<div style="width:100% ; min-height : 600px ; " class="bg-light p-5 d-flex align-items-center">
 		<div class="container">
 			<h1>Explore more than 100 products!</h1>
 			<div class="row h-100 rounded-5 py-3">
